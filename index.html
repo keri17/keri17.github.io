@@ -1,0 +1,380 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --navy:#0a0f1e;--navy-mid:#111827;--navy-soft:#1a2235;
+    --accent:#00d4a1;--accent-dim:#00b389;--accent-glow:rgba(0,212,161,0.12);
+    --slate:#8899aa;--light:#e8edf5;--white:#ffffff;
+    --border:rgba(255,255,255,0.07);--border-accent:rgba(0,212,161,0.25);
+    --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);background:var(--navy);color:var(--light);line-height:1.7;overflow-x:hidden;}
+  .portfolio{max-width:900px;margin:0 auto;padding:0 2rem 4rem;}
+
+  /* NAV */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:2rem 0 1.5rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;background:var(--navy);z-index:100;}
+  .nav-logo{font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:0.04em;color:var(--white);cursor:pointer;}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:1.5rem;list-style:none;}
+  .nav-links a{font-size:12px;color:var(--slate);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;cursor:pointer;padding:4px 0;border-bottom:1.5px solid transparent;transition:color 0.2s,border-color 0.2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+  /* HERO */
+  .hero{padding:5rem 0 4rem;}
+  .hero-inner{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-glow);border:0.5px solid var(--border-accent);border-radius:100px;padding:6px 14px;margin-bottom:2rem;font-family:var(--font-display);font-weight:600;}
+  .hero-badge::before{content:'';display:block;width:6px;height:6px;background:var(--accent);border-radius:50%;}
+  .hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.1;color:var(--white);margin-bottom:1.5rem;letter-spacing:-0.02em;}
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero-bio{font-size:16px;color:var(--slate);max-width:560px;line-height:1.75;margin-bottom:2.5rem;font-weight:300;}
+  .hero-bio strong{color:var(--light);font-weight:500;}
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+  .hero-photo-wrap{position:relative;flex-shrink:0;}
+  .hero-photo-frame{width:190px;height:190px;border-radius:16px;overflow:hidden;border:2px solid var(--border-accent);}
+  .hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .hero-photo-accent{position:absolute;bottom:-10px;right:-10px;width:58px;height:58px;background:var(--accent-glow);border:0.5px solid var(--border-accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:0.08em;color:var(--accent);text-align:center;line-height:1.3;padding:8px;}
+
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--navy);font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:0.04em;padding:12px 24px;border-radius:6px;text-decoration:none;cursor:pointer;border:none;transition:background 0.2s,transform 0.15s;}
+  .btn-primary:hover{background:var(--accent-dim);transform:translateY(-1px);}
+  .btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--light);font-family:var(--font-display);font-size:14px;font-weight:600;letter-spacing:0.04em;padding:12px 24px;border-radius:6px;border:0.5px solid rgba(255,255,255,0.2);text-decoration:none;cursor:pointer;transition:border-color 0.2s,color 0.2s;}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+  .section-header{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
+  .section-tag{font-family:var(--font-display);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .section-line{flex:1;height:0.5px;background:var(--border);}
+  section{padding:4rem 0;border-top:0.5px solid var(--border);}
+  section h2{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--white);margin-bottom:1.5rem;letter-spacing:-0.02em;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .about-text p{color:var(--slate);font-size:15px;font-weight:300;margin-bottom:1rem;line-height:1.8;}
+  .about-text p strong{color:var(--light);font-weight:500;}
+  .about-stats{display:flex;flex-direction:column;gap:1rem;}
+  .stat-card{background:var(--navy-soft);border:0.5px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;position:relative;overflow:hidden;}
+  .stat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);}
+  .stat-card-num{font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px;}
+  .stat-card-label{font-size:13px;color:var(--slate);}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;}
+  .skill-card{background:var(--navy-soft);border:0.5px solid var(--border);border-radius:10px;padding:1.75rem;transition:border-color 0.2s,transform 0.2s;}
+  .skill-card:hover{border-color:var(--border-accent);transform:translateY(-2px);}
+  .skill-icon{width:42px;height:42px;background:var(--accent-glow);border:0.5px solid var(--border-accent);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:20px;color:var(--accent);}
+  .skill-card h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:0.75rem;}
+  .skill-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .skill-list li{font-size:13px;color:var(--slate);display:flex;align-items:center;gap:8px;}
+  .skill-list li::before{content:'';display:block;width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+  .skill-bar-wrap{margin-top:1rem;display:flex;flex-direction:column;gap:8px;}
+  .skill-bar-row{display:flex;align-items:center;gap:10px;}
+  .skill-bar-label{font-size:12px;color:var(--slate);min-width:90px;}
+  .skill-bar-bg{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+  .skill-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s ease;}
+
+  /* PROJECTS */
+  .projects-grid{display:flex;flex-direction:column;gap:1.5rem;}
+  .project-card{background:var(--navy-soft);border:0.5px solid var(--border);border-radius:12px;padding:2rem;transition:border-color 0.2s;}
+  .project-card:hover{border-color:var(--border-accent);}
+  .project-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .project-title-group h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--white);letter-spacing:-0.02em;margin-bottom:4px;}
+  .project-type{font-size:12px;color:var(--accent);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;}
+  .tech-stack{display:flex;gap:6px;flex-wrap:wrap;}
+  .tech-tag{font-size:11px;font-family:var(--font-display);font-weight:600;letter-spacing:0.05em;background:rgba(0,212,161,0.1);color:var(--accent);border:0.5px solid var(--border-accent);border-radius:4px;padding:3px 9px;}
+  .project-desc{font-size:14px;color:var(--slate);line-height:1.75;margin-bottom:1.25rem;font-weight:300;}
+  .project-desc strong{color:var(--light);font-weight:500;}
+  .project-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .project-bullets li{font-size:13px;color:var(--slate);display:flex;align-items:flex-start;gap:10px;line-height:1.6;}
+  .project-bullets li::before{content:'→';color:var(--accent);font-size:12px;flex-shrink:0;margin-top:2px;}
+
+  /* EDGE */
+  .edge-section{background:var(--navy-soft);border:0.5px solid var(--border);border-radius:14px;padding:2.5rem;}
+  .edge-intro{font-size:15px;color:var(--slate);font-weight:300;line-height:1.8;margin-bottom:1.5rem;}
+  .edge-intro strong{color:var(--light);font-weight:500;}
+  .edge-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;}
+  .pillar{background:var(--navy-mid);border:0.5px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;}
+  .pillar-num{font-family:var(--font-display);font-size:11px;font-weight:800;color:var(--accent);letter-spacing:0.1em;margin-bottom:8px;}
+  .pillar h4{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;}
+  .pillar p{font-size:13px;color:var(--slate);font-weight:300;line-height:1.6;}
+
+  /* DEPLOY */
+  .deploy-steps{display:flex;flex-direction:column;gap:0;}
+  .deploy-step{display:flex;gap:1.5rem;position:relative;}
+  .deploy-step:not(:last-child)::after{content:'';position:absolute;left:20px;top:44px;bottom:-1px;width:1px;background:var(--border-accent);}
+  .step-num{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--accent-glow);border:0.5px solid var(--border-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;font-weight:800;color:var(--accent);margin-top:4px;}
+  .step-body{padding-bottom:2rem;flex:1;}
+  .step-body h4{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;}
+  .step-body p{font-size:13px;color:var(--slate);line-height:1.7;font-weight:300;}
+  .step-body code{font-family:monospace;font-size:12px;background:rgba(0,212,161,0.1);border:0.5px solid var(--border-accent);color:var(--accent);padding:2px 8px;border-radius:4px;display:inline-block;margin-top:6px;}
+
+  /* CTA */
+  .cta-section{text-align:center;padding:5rem 0 3rem;border-top:0.5px solid var(--border);}
+  .cta-section h2{font-family:var(--font-display);font-size:2.2rem;font-weight:800;color:var(--white);letter-spacing:-0.03em;margin-bottom:1rem;}
+  .cta-section h2 em{font-style:normal;color:var(--accent);}
+  .cta-section p{font-size:16px;color:var(--slate);max-width:500px;margin:0 auto 2.5rem;font-weight:300;line-height:1.7;}
+  .cta-cards{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
+  .contact-card{background:var(--navy-soft);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.75rem;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--light);text-decoration:none;transition:border-color 0.2s,color 0.2s;cursor:pointer;}
+  .contact-card:hover{border-color:var(--border-accent);color:var(--accent);}
+  .contact-card i{font-size:18px;color:var(--accent);}
+  footer{text-align:center;padding:2rem 0;border-top:0.5px solid var(--border);font-size:12px;color:var(--slate);letter-spacing:0.06em;}
+</style>
+
+<div class="portfolio">
+
+<nav id="top-nav">
+  <div class="nav-logo" onclick="scrollTo(0,0)">dev<span>.</span>portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about" onclick="navClick(event,'about')">About</a></li>
+    <li><a href="#skills" onclick="navClick(event,'skills')">Skills</a></li>
+    <li><a href="#projects" onclick="navClick(event,'projects')">Projects</a></li>
+    <li><a href="#deploy" onclick="navClick(event,'deploy')">Deploy</a></li>
+    <li><a href="#contact" onclick="navClick(event,'contact')">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none;padding-top:5rem;" id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Available for Opportunities</div>
+      <h1>Engineering Systems<br>That <em>Think</em> Like a<br>Business.</h1>
+      <p class="hero-bio">I'm a <strong>Software Engineer & Technology Strategist</strong> with expertise in Java, Python, Laravel, and Cisco Networking — paired with a management background that turns technical execution into organizational impact.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="smoothTo('contact')"><i class="ti ti-send" aria-hidden="true"></i> Get in Touch</button>
+        <button class="btn-outline" onclick="smoothTo('projects')"><i class="ti ti-folder" aria-hidden="true"></i> View Projects</button>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame"><img src="kerod.jpg" alt="Kerod — Software Engineer & Technology Strategist"/></div>
+      <div class="hero-photo-accent">IT &amp;<br>MGMT</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header"><span class="section-tag">About Me</span><div class="section-line"></div></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Most engineers speak code. Most managers speak strategy. I speak both — and that's a rare advantage in today's enterprise technology landscape.</p>
+      <p>My foundation is a dual academic background in <strong>Information Technology (Software Engineering & Computer Networking)</strong> and <strong>Management</strong> — the lens through which I design every system I build.</p>
+      <p>I've led teams as a class representative, driven cross-functional decisions, and delivered enterprise software ranging from <strong>biometric authentication platforms</strong> to <strong>full-stack Laravel applications</strong> and automated network infrastructure.</p>
+      <p>I don't just write code that works — I engineer solutions that <strong>align with how organizations actually operate</strong>, scale with business growth, and solve the right problems from the start.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-card-num">3+</div><div class="stat-card-label">Enterprise systems built & deployed</div></div>
+      <div class="stat-card"><div class="stat-card-num">2×</div><div class="stat-card-label">Dual disciplines: IT + Management</div></div>
+      <div class="stat-card"><div class="stat-card-num">Full</div><div class="stat-card-label">Stack: Backend, networking & infrastructure</div></div>
+      <div class="stat-card"><div class="stat-card-num">CCNA</div><div class="stat-card-label">Cisco networking & VLAN infrastructure</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header"><span class="section-tag">Core Skills</span><div class="section-line"></div></div>
+  <h2>What I Bring to Every Project</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon"><i class="ti ti-coffee" aria-hidden="true"></i></div>
+      <h3>Java Development</h3>
+      <ul class="skill-list">
+        <li>Object-oriented architecture & design patterns</li>
+        <li>Enterprise application development</li>
+        <li>Modular role-based systems</li>
+        <li>Complex data management & reporting</li>
+      </ul>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-row"><span class="skill-bar-label">Java Core</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+        <div class="skill-bar-row"><span class="skill-bar-label">OOP Design</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon"><i class="ti ti-brand-python" aria-hidden="true"></i></div>
+      <h3>Python & Automation</h3>
+      <ul class="skill-list">
+        <li>Router & network automation scripts</li>
+        <li>Data processing & pipeline scripting</li>
+        <li>System administration automation</li>
+        <li>API integration & task scheduling</li>
+      </ul>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-row"><span class="skill-bar-label">Python</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+        <div class="skill-bar-row"><span class="skill-bar-label">Automation</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:78%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon"><i class="ti ti-server" aria-hidden="true"></i></div>
+      <h3>Laravel & Web Backend</h3>
+      <ul class="skill-list">
+        <li>Laravel MVC full-stack development</li>
+        <li>PHP backend APIs & Blade templating</li>
+        <li>MySQL database design & Eloquent ORM</li>
+        <li>Authentication, roles & middleware</li>
+      </ul>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-row"><span class="skill-bar-label">Laravel</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+        <div class="skill-bar-row"><span class="skill-bar-label">PHP / SQL</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon"><i class="ti ti-network" aria-hidden="true"></i></div>
+      <h3>Cisco Networking</h3>
+      <ul class="skill-list">
+        <li>VLAN management & inter-VLAN routing</li>
+        <li>DTP, STP & switching configuration</li>
+        <li>Router setup & ACL management</li>
+        <li>Network topology design & troubleshooting</li>
+      </ul>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-row"><span class="skill-bar-label">Cisco IOS</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+        <div class="skill-bar-row"><span class="skill-bar-label">Network Design</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon"><i class="ti ti-brand-javascript" aria-hidden="true"></i></div>
+      <h3>JavaScript & Frontend</h3>
+      <ul class="skill-list">
+        <li>Vanilla JS, DOM manipulation & events</li>
+        <li>Node.js backend scripting</li>
+        <li>Dynamic UI components & interactions</li>
+        <li>REST API consumption & fetch/async</li>
+      </ul>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-row"><span class="skill-bar-label">JavaScript</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+        <div class="skill-bar-row"><span class="skill-bar-label">Node.js</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:72%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
+      <h3>Leadership & Management</h3>
+      <ul class="skill-list">
+        <li>Team coordination & decision-making</li>
+        <li>Systems workflow & process design</li>
+        <li>Business requirements analysis</li>
+        <li>Technical research & presentations</li>
+      </ul>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-row"><span class="skill-bar-label">Project Lead</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar-row"><span class="skill-bar-label">Strategy</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header"><span class="section-tag">Featured Projects</span><div class="section-line"></div></div>
+  <h2>Systems Built to Solve Real Problems</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-group"><div class="project-type">Strategic Management Application</div><h3>Hope System</h3></div>
+        <div class="tech-stack"><span class="tech-tag">Laravel</span><span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span><span class="tech-tag">Blade</span><span class="tech-tag">JavaScript</span></div>
+      </div>
+      <p class="project-desc">A full-stack <strong>organizational management application built on Laravel</strong>, designed to centralize workflows, track core operational metrics, and streamline administrative processes for complex organizations.</p>
+      <ul class="project-bullets">
+        <li>Built on the Laravel MVC framework with Blade templating for a clean, maintainable full-stack architecture</li>
+        <li>Engineered a MySQL-backed data layer for tracking KPIs, user activity, and organizational reporting</li>
+        <li>Implemented Laravel's built-in authentication with role-based middleware for access control</li>
+        <li>Applied management domain knowledge to mirror real organizational workflows inside the system</li>
+      </ul>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-group"><div class="project-type">Enterprise Management Platform</div><h3>Adot System v2.5</h3></div>
+        <div class="tech-stack"><span class="tech-tag">Java</span><span class="tech-tag">PHP</span><span class="tech-tag">Node.js</span><span class="tech-tag">SQL</span><span class="tech-tag">JavaScript</span></div>
+      </div>
+      <p class="project-desc">A robust, <strong>production-grade enterprise platform</strong> featuring custom dashboards, granular role-based access control, and an automated data backup system — engineered to scale across diverse organizational needs.</p>
+      <ul class="project-bullets">
+        <li>Built multi-tier RBAC ensuring department-level data isolation and permission governance</li>
+        <li>Designed custom JavaScript-powered dashboards delivering real-time operational visibility per role</li>
+        <li>Developed an automated backup module with scheduled execution and integrity verification</li>
+        <li>Architected for extensibility — new modules integrate without disrupting core functionality</li>
+      </ul>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-group"><div class="project-type">Biometric Security & Access System</div><h3>Automated Biometric Authentication System</h3></div>
+        <div class="tech-stack"><span class="tech-tag">Java</span><span class="tech-tag">Python</span><span class="tech-tag">Biometric SDK</span><span class="tech-tag">SQL</span></div>
+      </div>
+      <p class="project-desc">A modular identity verification system integrating <strong>fingerprint sensor hardware</strong> with a Java/Python software layer — enabling scan-triggered authentication with department-level access control and automated reporting.</p>
+      <ul class="project-bullets">
+        <li>Engineered the full hardware-to-software pipeline: sensor trigger → Java identity engine → access decision</li>
+        <li>Used Python scripts to automate report generation, log analysis, and anomaly detection</li>
+        <li>Built department-specific reporting modules for access logs, attendance summaries, and security flags</li>
+        <li>Modular design allows biometric hardware swaps without modifying the management layer</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPETITIVE EDGE -->
+<section id="edge">
+  <div class="section-header"><span class="section-tag">The Competitive Edge</span><div class="section-line"></div></div>
+  <div class="edge-section">
+    <h2 style="margin-bottom:1rem;">Why Dual Expertise Changes Everything</h2>
+    <p class="edge-intro">Most developers learn to code. Fewer learn to <strong>think like an organization</strong>. My management background is the strategic multiplier behind every system I build — I design for how people actually work, not just how data flows.</p>
+    <div class="edge-pillars">
+      <div class="pillar"><div class="pillar-num">01</div><h4>Requirements Clarity</h4><p>I translate organizational goals into precise technical specs — reducing rework and scope creep from day one.</p></div>
+      <div class="pillar"><div class="pillar-num">02</div><h4>Workflow-First Design</h4><p>Systems I build mirror real operational logic, making them intuitive for the people who use them daily.</p></div>
+      <div class="pillar"><div class="pillar-num">03</div><h4>Team Dynamics Awareness</h4><p>Having led teams, I understand communication gaps and what makes collaborative delivery succeed or fail.</p></div>
+      <div class="pillar"><div class="pillar-num">04</div><h4>Strategic Value Focus</h4><p>Technical decisions are business decisions. I prioritize solutions that deliver measurable organizational value.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="hero-badge" style="margin-bottom:1.5rem;display:inline-flex;">Open to Opportunities</div>
+  <h2>Let's Build Something <em>Exceptional.</em></h2>
+  <p>Whether you're looking to hire a software engineer who understands your business, collaborate on a project, or simply connect — I'd love to hear from you.</p>
+  <div class="cta-cards">
+    <a class="contact-card" href="mailto:your@email.com"><i class="ti ti-mail" aria-hidden="true"></i>Send an Email</a>
+    <a class="contact-card" href="https://linkedin.com" target="_blank"><i class="ti ti-brand-linkedin" aria-hidden="true"></i>LinkedIn</a>
+    <a class="contact-card" href="https://github.com" target="_blank"><i class="ti ti-brand-github" aria-hidden="true"></i>GitHub</a>
+  </div>
+  <button class="btn-primary" onclick="sendPrompt('I want to update my email, LinkedIn and GitHub links in the portfolio.')">
+    <i class="ti ti-edit" aria-hidden="true"></i> Update My Contact Links ↗
+  </button>
+</section>
+
+<footer>Built with precision. Engineered with purpose. &nbsp;·&nbsp; All rights reserved.</footer>
+</div>
+
+<script>
+function smoothTo(id){
+  var el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+function navClick(e,id){
+  e.preventDefault();
+  smoothTo(id);
+  document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('active');});
+  e.target.classList.add('active');
+}
+var sections=['about','skills','projects','deploy','contact'];
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var id=entry.target.id;
+      document.querySelectorAll('.nav-links a').forEach(function(a){
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+sections.forEach(function(id){var el=document.getElementById(id);if(el)observer.observe(el);});
+</script>
