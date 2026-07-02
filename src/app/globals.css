@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans Ethiopic", system-ui, sans-serif;
+  --color-yadi-green: #2d6a4f;
+  --color-yadi-green-light: #40916c;
+  --color-yadi-gold: #d4a017;
+  --color-yadi-gold-light: #e6b422;
+  --color-yadi-red: #9b2226;
+  --color-yadi-red-light: #ae2012;
+  --color-yadi-cream: #fefae0;
+  --color-yadi-brown: #6b4226;
+}
+
+/* Hide scrollbar for category navigation */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Print styles */
+@media print {
+  @page {
+    margin: 0.5in;
+    size: auto;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+  }
+
+  /* Force background colors to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
